@@ -1,4 +1,5 @@
 import { Avatar, Box, Button, Divider, Stack, Typography } from '@mui/material'
+import {Add, Delete, Edit, ExitToApp} from '@mui/icons-material';
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 export const Teacherdashboard = () => {
@@ -62,11 +63,11 @@ export const Teacherdashboard = () => {
 
         }}>
             <Box sx={{}}>
-                <Avatar sx={{width:'120px',height:"120px"}}></Avatar>
+                <Avatar sx={{width:'120px',height:"120px", ml:2}}></Avatar>
             </Box>
         <Box sx=
         {{
-            bgcolor:'#edf3fc', border:'0px solid lightblue', width:"100%", 
+            bgcolor:'#f5f9ff', border:'0px solid lightblue', width:"100%", 
             height:"73vh",
             borderRadius:2,
             p:2,
@@ -76,7 +77,7 @@ export const Teacherdashboard = () => {
 
         }}>
             
-               <Typography sx={{ fontSize:30}}>Teacher Details</Typography>
+               <Typography sx={{ fontSize:25}}>Teacher Details</Typography>
                <Divider sx={{bgcolor:"black", mb:2}}/>
                 
                 <Typography>First Name :</Typography> 
@@ -95,7 +96,7 @@ export const Teacherdashboard = () => {
                 <Box sx={{border:"1px solid lightblue",p:1,mb:2}}>
                 { teacherdetails.length > 0 && teacherdetails[0].id}
                 </Box>
-                <Button sx={{ bgcolor:'#0481cf', color:'white'}}>Edit details</Button>
+                <Button endIcon={<Edit/>} sx={{ bgcolor:'#0481cf', color:'white'}}>Edit details</Button>
             
         </Box>
         </Box>
@@ -110,7 +111,7 @@ export const Teacherdashboard = () => {
                             <tr>
                                 <td >Course ID</td>
                                 <td >Course Name</td>
-                                <td >Delete</td>
+                                <td >Action</td>
 
                                
 
@@ -121,13 +122,15 @@ export const Teacherdashboard = () => {
                             <tr key={i}>
                                 <td style={{}}>{data.id}  </td> 
                                 <td>{data.name}  </td> 
-                                {/* <Button sx={{bgcolor:'#db5b44',color:'blue',mt:1}}>Delete</Button> */}
-                                <button className='btn btn-danger m-2'>Delete</button>
+                                {/* <td><Button startIcon={<Delete/>} sx={{mt:1, }}></Button></td> */}
+                               <td> <button className='btn m-2' style={{backgroundColor:'#9c3b3b', color:'white'}}>Delete</button></td>
                             </tr>
                         ))
                     }
                     </table>
-                    <Button sx={{ bgcolor:'#0481cf', color:'white',mt:3}}>Edit Courses</Button>
+                    <Button endIcon={<Add/>} sx={{ bgcolor:'#038C4C', color:'white',mt:3}}>Add Course</Button>
+                    <Button endIcon={<Edit/>} sx={{ bgcolor:'#0481cf', color:'white',mt:3, ml:1}}>Edit Courses</Button>
+
                 </Box>
                 <Box sx={{bgcolor:'#edf3fc', mt:2, borderRadius:2, height:"40vh", p:2, boxShadow:2}}>
                 <Typography>Semester</Typography>
@@ -141,7 +144,7 @@ export const Teacherdashboard = () => {
             <Box sx={{bgcolor:'#065956', mt:2, borderRadius:2, height:"10vh", p:2, boxShadow:1, color:'white'}}>
                 <Stack direction='row'>
                     <Typography sx={{flex:3}}>Welcome <bold>{ teacherdetails.length > 0 && teacherdetails[0].l_name} </bold></Typography>
-                    <Button variant='outlined' color='#edf3fc' sx={{ flex:1}}>Sign out</Button>
+                    <Button endIcon={<ExitToApp/>} variant='outlined' color='#edf3fc' sx={{ flex:1}}>Sign out</Button>
                     </Stack>
                 </Box>
                 <Box sx={{bgcolor:'#edf3fc', mt:2, borderRadius:2, height:"30vh", p:2, boxShadow:2}}>
