@@ -16,6 +16,10 @@ export const TeacherLogin = () => {
 
     const navigate = useNavigate()
 
+
+    // simple alert -----------------------------------------
+    const [alert, setAlert] = useState(false)
+
 // -----------
 
 
@@ -26,19 +30,23 @@ export const TeacherLogin = () => {
             axios.post('http://localhost:8089/teacherlogin', {name, password})
                 .then(res=>
                     {
-                        console.log(res.data)
+                        // console.log(res.data)
                         setAlertseverity("success")
                         setAlertmessage("Login successfull")
                         setOpen(true);
                     setTimeout(() => {
-                    navigate('/students');
+                    navigate('/teacherdashboard');
                 }, 1000); // Navigate after 1 seconds 
+                    localStorage.setItem('token',res.data.accessToken)   // set user auth token 
+                    console.log("************")
+
                     })
                 .catch(err=>
                     {
-                        setAlertseverity('error');
-                setAlertmessage('Username or password incorrect.');
-                setOpen(true);
+                    setAlertseverity('error');
+                    setAlertmessage('Username or password incorrect.');
+                    setOpen(true);
+                    setAlert(true)
                         console.log('--'+err)
 
                     })
@@ -70,9 +78,17 @@ export const TeacherLogin = () => {
             </Snackbar>
             {/* -------------------------------------------------------------------------- */}
 
+          
+
         </Box>
         <Box sx={{bgcolor:'rgb(12, 89, 6,0.5)', width:'30%', height:'70vh', p:4, boxShadow:5}}>
             <Typography sx={{mt:3, mb:5,color:'white'}}>TEACHER SIGN IN</Typography>
+              {/* Simple alert */}
+              {alert ? (<Alert sx={{mb:2}} variant="filled" severity="error">
+                    Username or password is incorrect
+                  </Alert>) : null }
+                    
+            {/* end simple alert */}
             <form className='form' onSubmit={handleSubmit}>
                 <label style={{marginBottom:10}}>UserName</label>
                 <input

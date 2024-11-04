@@ -1,8 +1,11 @@
+
+require('dotenv').config()
 const express = require('express')
 const app = express('')
 const cors = require('cors')
 const mysql = require('mysql2')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 app.use(express.json())
 app.use(cors())
@@ -16,6 +19,7 @@ const db = mysql.createConnection({
     password:'kasibante'
 })
 
+// get courses credentials ------------------------------------------------
 
 app.get('/courses', (req,res)=>{
     const sql = 'select * from courses;'
@@ -25,10 +29,7 @@ app.get('/courses', (req,res)=>{
     })
 })
 
-
-
-
-// get student credentials
+// get student credentials ------------------------------------------------
 
 app.get('/students',  (req,res)=>{
     const sql = 'select * from students'
@@ -124,7 +125,18 @@ app.post('/teacherlogin', async (req,res)=>{
         // check password
         if(user.password == aa){
             req.user = user    // added this to authorize teacher 
-            res.json("Login Successful")
+            // res.json("Login Successful")
+
+            // authorization -----------------
+
+             const username = req.body.name
+
+             const user_auth = {name:username}
+
+             const accessToken = jwt.sign(user_auth, process.env.ACCESS_TOKEN_SECRET, {expiresIn:'30m'})
+
+            res.json({accessToken : accessToken})
+
         } 
         else{
             res.sendStatus(403)
@@ -134,11 +146,46 @@ app.post('/teacherlogin', async (req,res)=>{
     catch{
         res.send(500).json('Somethings wrong')
     }
+
+
+
+
+
 })
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------    
                 // teacher login end
 //------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+// teacher details
+
+app.get('/teacherdetails',authenticateUser, (req,res)=>{
+    const sql = 'select * from teachers where f_name = ?'
+    db.query(sql,[req.user_auth.name],(err,data)=>{
+        if(err){
+            return res.json(err)
+        }
+        res.json(data)
+    })
+})
+
+function authenticateUser(req,res,next){
+
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(" ")[1]
+
+    if(token == null) return res.sendStatus(403)
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user_auth)=>{
+        if(err){
+            return res.sendStatus(403)
+        }
+        req.user_auth = user_auth
+        next()
+    })
+}
 
 
 
