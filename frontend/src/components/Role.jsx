@@ -14,9 +14,9 @@ export const Role = () => {
         <Box sx={{bgcolor:'rgb(12, 89, 6,0.5)', width:'30%', height:'70vh', p:4, boxShadow:5}}>
             <Typography sx={{mt:3,color:'white',mb:10}}>CHOOSE ROLE</Typography>
             <Stack>
-            <Button sx={{bgcolor:'#4E5927', mb:1, color:'white'}} component={Link} to="/studentlogin" >Student</Button>
-            <Button sx={{bgcolor:'#4E5927', mb:1, color:'white'}}component={Link} to="/teacherlogin" >Teacher</Button>
-            <Button sx={{bgcolor:'#4E5927', mb:1, color:'white'}}>Admin</Button>
+            <Button sx={{bgcolor:'#0477BF', mb:1, color:'white', borderRadius:5}} component={Link} to="/studentlogin" >Student</Button>
+            <Button sx={{bgcolor:'#0477BF', mb:1, color:'white',borderRadius:5}}component={Link} to="/teacherlogin" >Teacher</Button>
+            <Button sx={{bgcolor:'#0477BF', mb:1, color:'white',borderRadius:5}}>Admin</Button>
             </Stack>
         </Box>
     </Box>

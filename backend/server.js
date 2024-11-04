@@ -19,11 +19,21 @@ const db = mysql.createConnection({
     password:'kasibante'
 })
 
-// get courses credentials ------------------------------------------------
+// get all courses credentials ------------------------------------------------
 
 app.get('/courses', (req,res)=>{
     const sql = 'select * from courses;'
     db.query(sql, (err,data)=>{
+        if(err)return res.json(err)
+        res.json(data)
+    })
+})
+
+// getting courses taught by specific teachers ------------------------------------------------
+
+app.get('/teachercourse',authenticateUser, (req,res)=>{
+    const sql = 'select t.f_name, c.name, c.id from teachers as t join courseteacher as ct on ct.teacher_id = t.id join courses as c on c.id = ct.course_id having f_name = ?'
+    db.query(sql,[req.user_auth.name] ,(err,data)=>{
         if(err)return res.json(err)
         res.json(data)
     })

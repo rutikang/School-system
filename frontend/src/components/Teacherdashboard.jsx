@@ -4,9 +4,8 @@ import axios from 'axios';
 export const Teacherdashboard = () => {
 
     const token = localStorage.getItem('token');
-
-
     const [teacherdetails, setTeacherdetails] = useState([])
+    const [taughtcourses,setTaughtCourses] = useState([])
     useEffect(()=>{
         axios.get('http://localhost:8089/teacherdetails/', {
             headers:{
@@ -27,18 +26,39 @@ export const Teacherdashboard = () => {
             })
             
     }, [])
+    useEffect(()=>{
+        axios.get('http://localhost:8089/teachercourse', {
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        }, [])
+            .then( res => 
+                {
+                    setTaughtCourses(res.data)
+                   console.log(res.data) 
+                  
+                })
+            .catch(err => 
+            {
+            console.log({Error : err.message})
+             
+            
+            })
+            
+    }, [])
 
 
   return (
     <>
     {/* ---------------------------------------------------------------------- */}
-    <Box>
+    <Box sx={{bgcolor:'#e3e6e8'}}>
         <Stack direction="row">
             <Box sx=
         {{
               width:"30%", m:2, 
             height:"100vh",
-            borderRadius:2
+            borderRadius:2,
+            
 
         }}>
             <Box sx={{}}>
@@ -47,11 +67,12 @@ export const Teacherdashboard = () => {
         <Box sx=
         {{
             bgcolor:'#edf3fc', border:'0px solid lightblue', width:"100%", 
-            height:"72vh",
+            height:"73vh",
             borderRadius:2,
             p:2,
             boxShadow:5,
-            mt:2
+            mt:2,
+            overflow: 'auto'
 
         }}>
             
@@ -79,11 +100,34 @@ export const Teacherdashboard = () => {
         </Box>
         </Box>
 
-        <Box sx={{bgcolor:'white', height:"100vh", width:"30%"}}>
+        <Box sx={{bgcolor:'#e3e6e8', height:"100vh", width:"30%"}}>
             <Stack>
-                <Box sx={{bgcolor:'#edf3fc', mt:2, borderRadius:2, height:"50vh", p:2, boxShadow:2}}>
+                <Box sx={{bgcolor:'#edf3fc', mt:2, borderRadius:2, height:"50vh", p:2, boxShadow:2, overflow: 'auto'}}>
                     <Typography>Courses</Typography>
-                    <Divider sx={{bgcolor:'black'}}/>
+                    <Divider sx={{bgcolor:'black', mb:2}}/>
+                    <table className='table'>
+                        <thead>
+                            <tr>
+                                <td >Course ID</td>
+                                <td >Course Name</td>
+                                <td >Delete</td>
+
+                               
+
+                            </tr>
+                        </thead>
+                    {
+                        taughtcourses.map((data,i)=>(
+                            <tr key={i}>
+                                <td style={{}}>{data.id}  </td> 
+                                <td>{data.name}  </td> 
+                                {/* <Button sx={{bgcolor:'#db5b44',color:'blue',mt:1}}>Delete</Button> */}
+                                <button className='btn btn-danger m-2'>Delete</button>
+                            </tr>
+                        ))
+                    }
+                    </table>
+                    <Button sx={{ bgcolor:'#0481cf', color:'white',mt:3}}>Edit Courses</Button>
                 </Box>
                 <Box sx={{bgcolor:'#edf3fc', mt:2, borderRadius:2, height:"40vh", p:2, boxShadow:2}}>
                 <Typography>Semester</Typography>
@@ -93,10 +137,12 @@ export const Teacherdashboard = () => {
         </Box>
         {/* -------------------------------- 3rd column --------------------------------------------------  */}
 
-        <Box sx={{bgcolor:'white', height:"100vh", width:"36%", ml:2}}>
-            <Box sx={{bgcolor:'#165745', mt:2, borderRadius:2, height:"10vh", p:2, boxShadow:1, color:'white'}}>
-                    <Typography>Signed In : { teacherdetails.length > 0 && teacherdetails[0].l_name} </Typography>
-                    {/* <Divider sx={{bgcolor:'black'}}/> */}
+        <Box sx={{bgcolor:'#e3e6e8', height:"100vh", width:"36%", ml:2}}>
+            <Box sx={{bgcolor:'#065956', mt:2, borderRadius:2, height:"10vh", p:2, boxShadow:1, color:'white'}}>
+                <Stack direction='row'>
+                    <Typography sx={{flex:3}}>Welcome <bold>{ teacherdetails.length > 0 && teacherdetails[0].l_name} </bold></Typography>
+                    <Button variant='outlined' color='#edf3fc' sx={{ flex:1}}>Sign out</Button>
+                    </Stack>
                 </Box>
                 <Box sx={{bgcolor:'#edf3fc', mt:2, borderRadius:2, height:"30vh", p:2, boxShadow:2}}>
                     <Typography>Assignments</Typography>
