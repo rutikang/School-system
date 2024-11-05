@@ -6,16 +6,18 @@ import { Role } from './components/Role';
 import { TeacherLogin } from './components/TeacherLogin';
 import { Students } from './components/Students';
 import { Teacherdashboard } from './components/Teacherdashboard';
+import { Studentdashboard } from './components/Studentdashboard';
 function App() {
   return (
     <>
   <BrowserRouter>
   <Routes>
     <Route path='/studentlogin' element={<StudentLogin/>}></Route>
-    <Route path='/role' element={<Role/>}></Route>
+    <Route path='/' element={<Role/>}></Route>
     <Route path='/teacherlogin' element={<TeacherLogin/>}></Route>
     <Route path='/students' element={<Students/>}></Route>
     <Route path='/teacherdashboard' element={<Teacherdashboard/>}></Route>
+    <Route path='/studentdashboard' element={<Studentdashboard/>}></Route>
 
     
   </Routes>

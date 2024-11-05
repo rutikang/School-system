@@ -23,8 +23,8 @@ export const StudentLogin = () => {
                 <input
                  className='form-control'
                 />
-                <Button sx={{bgcolor:'#0477BF', color:'white', mt:5, width:'35%',ml:'8%', borderRadius:5}}>Login</Button>
-                <Button sx={{bgcolor:'#038C4C', color:'white', mt:5, width:'35%', borderRadius:5, ml:2}} component={Link} to="/role">Role</Button>
+                <Button sx={{bgcolor:'#0477BF', color:'white', mt:5, width:'35%',ml:'8%', borderRadius:5}} component={Link} to="/studentdashboard">Login</Button>
+                <Button sx={{bgcolor:'#038C4C', color:'white', mt:5, width:'35%', borderRadius:5, ml:2}} component={Link} to="/">Role</Button>
             </form>
             
         </Box>
