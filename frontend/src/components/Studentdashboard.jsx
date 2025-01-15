@@ -3,6 +3,7 @@ import {Add, Delete, Edit, ExitToApp, Label} from '@mui/icons-material';
 import { LineChart } from '@mui/x-charts/LineChart';
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 export const Studentdashboard = () => {
 
     const token = localStorage.getItem('token');
@@ -64,7 +65,7 @@ export const Studentdashboard = () => {
 
         }}>
             <Box sx=
-            {{  bgcolor:'cyan', p:2,
+            {{  p:2,
                 borderRadius:5,
                 alignItems:'center',
                 justifyContent:'center',
@@ -106,7 +107,9 @@ export const Studentdashboard = () => {
                 <Box sx={{border:"1px solid lightblue",p:1,mb:2}}>
                 { teacherdetails.length > 0 && teacherdetails[0].id}
                 </Box>
+                <Link to='/studentedit'>
                 <Button endIcon={<Edit/>} sx={{ bgcolor:'#0481cf', color:'white'}}>Edit details</Button>
+                </Link>
             
         </Box>
         </Box>
@@ -175,7 +178,7 @@ export const Studentdashboard = () => {
                     <Card sx={{ width: 200 , height:240 }}>
                     <CardMedia
                         sx={{ height: 140 }}
-                        image="https://images.pexels.com/photos/60582/newton-s-cradle-balls-sphere-action-60582.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        image="https://images.pexels.com/photos/267582/pexels-photo-267582.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                         title="green iguana"
                     />
                     <CardContent>
@@ -203,7 +206,9 @@ export const Studentdashboard = () => {
             <Box sx={{bgcolor:'#065956', mt:2, borderRadius:2, height:"10vh", p:2, boxShadow:5, color:'white',  overflow:'fixed'}}>
                 <Stack direction='row'>
                     <Typography sx={{flex:3}}>Welcome <bold>{ teacherdetails.length > 0 && teacherdetails[0].l_name} </bold></Typography>
+                    <Link to='/studentlogin'>
                     <Button endIcon={<ExitToApp/>} variant='outlined' color='#edf3fc' sx={{ flex:1}}>signout</Button>
+                    </Link>
                     </Stack>
                 </Box>
                 <Box sx={{bgcolor:'white', mt:2, borderRadius:2, height:"35vh", p:1, boxShadow:5}}>

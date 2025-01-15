@@ -2,6 +2,7 @@ import { Avatar, Box, Button, Divider, Stack, Typography } from '@mui/material'
 import {Add, Delete, Edit, ExitToApp} from '@mui/icons-material';
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 export const Teacherdashboard = () => {
 
     const token = localStorage.getItem('token');
@@ -77,7 +78,7 @@ export const Teacherdashboard = () => {
         <Box sx=
         {{
             bgcolor:'white', border:'0px solid lightblue', width:"100%", 
-            height:"73vh",
+            height:"70vh",
             borderRadius:2,
             p:2,
             boxShadow:10,
@@ -105,14 +106,15 @@ export const Teacherdashboard = () => {
                 <Box sx={{border:"1px solid lightblue",p:1,mb:2}}>
                 { teacherdetails.length > 0 && teacherdetails[0].id}
                 </Box>
+                <Link to='/teacherdetailsupdate'>
                 <Button endIcon={<Edit/>} sx={{ bgcolor:'#0481cf', color:'white'}}>Edit details</Button>
-            
+                </Link>
         </Box>
         </Box>
 
-        <Box sx={{bgcolor:'#f0faff', height:"100vh", width:"30%"}}>
+        <Box sx={{bgcolor:'#f0faff', height:"100vh", width:"40%"}}>
             <Stack>
-                <Box sx={{bgcolor:'white', mt:2, borderRadius:2, height:"50vh", p:2, boxShadow:5, overflow: 'auto'}}>
+                <Box sx={{bgcolor:'white', mt:2, borderRadius:2, height:"60vh", p:2, boxShadow:5, overflow: 'auto', pl:5}}>
                     <Typography>Courses</Typography>
                     <Divider sx={{bgcolor:'black', mb:2}}/>
                     <table className='table'>
@@ -132,16 +134,24 @@ export const Teacherdashboard = () => {
                                 <td style={{}}>{data.id}  </td> 
                                 <td>{data.name}  </td> 
                                 {/* <td><Button startIcon={<Delete/>} sx={{mt:1, }}></Button></td> */}
-                               <td> <button className='btn m-2' style={{backgroundColor:'#9c3b3b', color:'white'}}>Delete</button></td>
+                               <td> 
+                                {/* <Link to='/courseedit'>
+                                 <button className='btn m-2' style={{backgroundColor:'#0481cf', color:'white', width:'80px'}}>Edit</button>
+                                 </Link> */}
+                                 <button className='btn m-2' style=
+                                {{backgroundColor:'#9c4c48', color:'white', width:'80px'}}>Delete</button>
+                                 </td>
                             </tr>
                         ))
                     }
                     </table>
+                    <Link to='/courseedit'>
                     <Button endIcon={<Add/>} sx={{ bgcolor:'#038C4C', color:'white',mt:3, mr:1}}>Add Course</Button>
-                    <Button endIcon={<Edit/>} sx={{ bgcolor:'#0481cf', color:'white',mt:3}}>Edit Courses</Button>
+                    </Link>
+                    {/* <Button endIcon={<Edit/>} sx={{ bgcolor:'#0481cf', color:'white',mt:3}}>Edit Courses</Button> */}
 
                 </Box>
-                <Box sx={{bgcolor:'white', mt:2, borderRadius:2, height:"40vh", p:2, boxShadow:5}}>
+                <Box sx={{bgcolor:'white', mt:2, borderRadius:2, height:"30vh", p:2, boxShadow:5}}>
                 <Typography>Semester</Typography>
                 <Divider sx={{bgcolor:'black'}}/>
                 </Box>
@@ -149,11 +159,13 @@ export const Teacherdashboard = () => {
         </Box>
         {/* -------------------------------- 3rd column --------------------------------------------------  */}
 
-        <Box sx={{bgcolor:'#f0faff', height:"100vh", width:"36%", ml:2}}>
+        <Box sx={{bgcolor:'#f0faff', height:"100vh", width:"30%", ml:2}}>
             <Box sx={{bgcolor:'#065956', mt:2, borderRadius:2, height:"10vh", p:2, boxShadow:5, color:'white'}}>
                 <Stack direction='row'>
                     <Typography sx={{flex:3}}>Welcome <bold>{ teacherdetails.length > 0 && teacherdetails[0].l_name} </bold></Typography>
-                    <Button endIcon={<ExitToApp/>} variant='outlined' color='#edf3fc' sx={{ flex:1}}>Sign out</Button>
+                    <Link to="/teacherlogin" style={{textDecoration:'none'}}>
+                    <Button endIcon={<ExitToApp/>}  color='#edf3fc' sx={{ flex:1, bgcolor:'#aabfb7'}} >Sign out</Button>
+                    </Link>
                     </Stack>
                 </Box>
                 <Box sx={{bgcolor:'white', mt:2, borderRadius:2, height:"30vh", p:2, boxShadow:5}}>

@@ -78,10 +78,17 @@ export const TeacherLogin = () => {
             </Snackbar>
             {/* -------------------------------------------------------------------------- */}
 
-          
+            <img
+    src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    style={{
+      // width: '100%', // Ensures the image scales to the width of the Box
+      height: '100%', // Ensures the image scales to the height of the Box
+      objectFit: 'contain', // Makes the image fit within the Box without cropping
+    }}
+  />
 
         </Box>
-        <Box sx={{bgcolor:'rgb(12, 89, 6,0.5)', width:'30%', height:'70vh', p:4, boxShadow:5}}>
+        <Box sx={{bgcolor:'#384a43', width:'30%', height:'70vh', p:4, boxShadow:5}}>
             <Typography sx={{mt:3, mb:5,color:'white'}}>TEACHER SIGN IN</Typography>
               {/* Simple alert */}
               {alert ? (<Alert sx={{mb:2}} variant="filled" severity="error">
@@ -90,13 +97,13 @@ export const TeacherLogin = () => {
                     
             {/* end simple alert */}
             <form className='form' onSubmit={handleSubmit}>
-                <label style={{marginBottom:10}}>UserName</label>
+                <label style={{marginBottom:10}}><Typography sx={{color:'#ccdbd5'}}>UserName</Typography></label>
                 <input
                 className='form-control'
                 style={{marginBottom:10}}
                 onChange={e=>setUsername(e.target.value)}
                 />
-                <label  style={{marginBottom:10}}>Password</label>
+                <label  style={{marginBottom:10}}><Typography sx={{color:'#ccdbd5'}}>Password</Typography></label>
                 <input
                  className='form-control'
                  onChange={e=>setPassword(e.target.value)}

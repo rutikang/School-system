@@ -181,6 +181,33 @@ app.get('/teacherdetails',authenticateUser, (req,res)=>{
     })
 })
 
+
+
+
+app.put('/teacherdetails_update',authenticateUser, (req,res)=>{
+    const username = req.user_auth.name;
+    const sql = `update teachers set 
+                    f_name = '?',
+                    l_name = '?',
+                    gender = '?',
+                    password = '?'
+                    where f_name = ?;`
+    db.query(sql,[username],(err,data)=>{
+        if(err){
+            return res.json(err)
+        }
+        res.json(data)
+    })
+})
+
+
+
+
+
+
+
+
+
 function authenticateUser(req,res,next){
 
     const authHeader = req.headers['authorization']

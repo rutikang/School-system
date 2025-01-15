@@ -7,10 +7,13 @@ import { TeacherLogin } from './components/TeacherLogin';
 import { Students } from './components/Students';
 import { Teacherdashboard } from './components/Teacherdashboard';
 import { Studentdashboard } from './components/Studentdashboard';
+import { Teacherdetailsupdate } from './components/Teacherdetailsupdate';
+import { Courseedit } from './components/Courseedit';
+import { Studentedit } from './components/Studentedit';
 function App() {
   return (
     <>
-  <BrowserRouter>
+  {/* <BrowserRouter> */}
   <Routes>
     <Route path='/studentlogin' element={<StudentLogin/>}></Route>
     <Route path='/' element={<Role/>}></Route>
@@ -18,11 +21,15 @@ function App() {
     <Route path='/students' element={<Students/>}></Route>
     <Route path='/teacherdashboard' element={<Teacherdashboard/>}></Route>
     <Route path='/studentdashboard' element={<Studentdashboard/>}></Route>
+    <Route path='/teacherdetailsupdate' element={<Teacherdetailsupdate/>}></Route>
+    <Route path='/courseedit' element={<Courseedit/>}></Route>
+    <Route path='/studentedit' element={<Studentedit/>}></Route>
+
 
     
   </Routes>
   
-  </BrowserRouter>
+  {/* </BrowserRouter> */}
 
     </>
   );
